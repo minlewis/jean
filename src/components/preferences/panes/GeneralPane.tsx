@@ -6,6 +6,7 @@ import React, {
   useRef,
   type FC,
 } from 'react'
+import { useTranslation } from 'react-i18next'
 import { invoke } from '@/lib/transport'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
@@ -194,6 +195,7 @@ type PreferencesPaneScope =
 export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
   scope = 'general',
 }) => {
+  const { t } = useTranslation()
   const isGeneralScope = scope === 'general'
   const queryClient = useQueryClient()
   const { data: preferences } = usePreferences()
@@ -2347,13 +2349,15 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
 
       {isGeneralScope && (
         <SettingsSection
-          title="Defaults"
+          title={t('settings.general.sections.defaults')}
           anchorId="pref-general-section-defaults"
         >
           <div className="space-y-4">
             <InlineField
-              label="Default backend"
-              description="CLI to use for new sessions"
+              label={t('settings.general.defaults.defaultBackend.label')}
+              description={t(
+                'settings.general.defaults.defaultBackend.description'
+              )}
             >
               <Select
                 value={effectiveBackend}
@@ -2376,8 +2380,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
             </InlineField>
 
             <InlineField
-              label="Default mode"
-              description="Permission mode for new sessions"
+              label={t('settings.general.defaults.defaultMode.label')}
+              description={t(
+                'settings.general.defaults.defaultMode.description'
+              )}
             >
               <Select
                 value={preferences?.default_execution_mode ?? 'plan'}
@@ -2389,16 +2395,24 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="plan">Plan</SelectItem>
-                  <SelectItem value="build">Build</SelectItem>
-                  <SelectItem value="yolo">Yolo</SelectItem>
+                  <SelectItem value="plan">
+                    {t('settings.general.defaults.modeOptions.plan')}
+                  </SelectItem>
+                  <SelectItem value="build">
+                    {t('settings.general.defaults.modeOptions.build')}
+                  </SelectItem>
+                  <SelectItem value="yolo">
+                    {t('settings.general.defaults.modeOptions.yolo')}
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </InlineField>
 
             <InlineField
-              label="Compact chat view"
-              description="Compact answers into one section for a cleaner chat, showing only the last prompt and answer by default."
+              label={t('settings.general.defaults.compactChatView.label')}
+              description={t(
+                'settings.general.defaults.compactChatView.description'
+              )}
             >
               <Switch
                 checked={preferences?.compact_chat_view_enabled ?? false}
@@ -2411,8 +2425,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
             </InlineField>
 
             <InlineField
-              label="Parallel execution prompting"
-              description="Add system prompt encouraging sub-agent parallelization for faster task execution"
+              label={t('settings.general.defaults.parallelExecution.label')}
+              description={t(
+                'settings.general.defaults.parallelExecution.description'
+              )}
             >
               <Switch
                 checked={
@@ -2427,8 +2443,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
             </InlineField>
 
             <InlineField
-              label="Build execution"
-              description="Backend, model, thinking, and effort override when approving plans"
+              label={t('settings.general.defaults.buildExecution.label')}
+              description={t(
+                'settings.general.defaults.buildExecution.description'
+              )}
             >
               <div className="grid grid-cols-4 gap-2">
                 <div>
@@ -2440,7 +2458,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="default">Default</SelectItem>
+                      <SelectItem value="default">
+                        {t('settings.general.defaults.common.default')}
+                      </SelectItem>
                       {buildBackendOptions.map(option => (
                         <SelectItem key={option.value} value={option.value}>
                           <BackendLabel backend={option.value} />
@@ -2470,7 +2490,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                                 formatOpenCodeModelLabelForSettings(
                                   preferences.build_model
                                 ))
-                              : 'Default model'}
+                              : t(
+                                  'settings.general.defaults.common.defaultModel'
+                                )}
                           </span>
                           <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
                         </Button>
@@ -2488,7 +2510,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                                   setBuildModelPopoverOpen(false)
                                 }}
                               >
-                                Default model
+                                {t(
+                                  'settings.general.defaults.common.defaultModel'
+                                )}
                                 <Check
                                   className={cn(
                                     'ml-auto h-4 w-4',
@@ -2544,7 +2568,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                                   o => o.value === preferences.build_model
                                 )?.label ??
                                 formatCursorModelLabel(preferences.build_model))
-                              : 'Default model'}
+                              : t(
+                                  'settings.general.defaults.common.defaultModel'
+                                )}
                           </span>
                           <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
                         </Button>
@@ -2562,7 +2588,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                                   setBuildModelPopoverOpen(false)
                                 }}
                               >
-                                Default model
+                                {t(
+                                  'settings.general.defaults.common.defaultModel'
+                                )}
                                 <Check
                                   className={cn(
                                     'ml-auto h-4 w-4',
@@ -2609,7 +2637,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="default">Default model</SelectItem>
+                        <SelectItem value="default">
+                          {t('settings.general.defaults.common.defaultModel')}
+                        </SelectItem>
                         {(effectiveBuildBackend === 'codex'
                           ? codexDefaultModelOptions
                           : modelOptions
@@ -2631,7 +2661,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="default">Default thinking</SelectItem>
+                      <SelectItem value="default">
+                        {t('settings.general.defaults.common.defaultThinking')}
+                      </SelectItem>
                       {thinkingLevelOptions.map(option => (
                         <SelectItem key={option.value} value={option.value}>
                           {option.label}
@@ -2651,8 +2683,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                     <SelectContent>
                       <SelectItem value="default">
                         {effectiveBuildBackend === 'codex'
-                          ? 'Default reasoning'
-                          : 'Default effort'}
+                          ? t(
+                              'settings.general.defaults.common.defaultReasoning'
+                            )
+                          : t('settings.general.defaults.common.defaultEffort')}
                       </SelectItem>
                       {(effectiveBuildBackend === 'codex'
                         ? codexReasoningOptions
@@ -2669,8 +2703,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
             </InlineField>
 
             <InlineField
-              label="Yolo execution"
-              description="Backend, model, thinking, and effort override when yolo-approving plans"
+              label={t('settings.general.defaults.yoloExecution.label')}
+              description={t(
+                'settings.general.defaults.yoloExecution.description'
+              )}
             >
               <div className="grid grid-cols-4 gap-2">
                 <div>
@@ -2682,7 +2718,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="default">Default</SelectItem>
+                      <SelectItem value="default">
+                        {t('settings.general.defaults.common.default')}
+                      </SelectItem>
                       {backendOptions.map(option => (
                         <SelectItem key={option.value} value={option.value}>
                           <BackendLabel backend={option.value} />
@@ -2712,7 +2750,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                                 formatOpenCodeModelLabelForSettings(
                                   preferences.yolo_model
                                 ))
-                              : 'Default model'}
+                              : t(
+                                  'settings.general.defaults.common.defaultModel'
+                                )}
                           </span>
                           <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
                         </Button>
@@ -2730,7 +2770,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                                   setYoloModelPopoverOpen(false)
                                 }}
                               >
-                                Default model
+                                {t(
+                                  'settings.general.defaults.common.defaultModel'
+                                )}
                                 <Check
                                   className={cn(
                                     'ml-auto h-4 w-4',
@@ -2786,7 +2828,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                                   o => o.value === preferences.yolo_model
                                 )?.label ??
                                 formatCursorModelLabel(preferences.yolo_model))
-                              : 'Default model'}
+                              : t(
+                                  'settings.general.defaults.common.defaultModel'
+                                )}
                           </span>
                           <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
                         </Button>
@@ -2804,7 +2848,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                                   setYoloModelPopoverOpen(false)
                                 }}
                               >
-                                Default model
+                                {t(
+                                  'settings.general.defaults.common.defaultModel'
+                                )}
                                 <Check
                                   className={cn(
                                     'ml-auto h-4 w-4',
@@ -2851,7 +2897,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="default">Default model</SelectItem>
+                        <SelectItem value="default">
+                          {t('settings.general.defaults.common.defaultModel')}
+                        </SelectItem>
                         {(effectiveYoloBackend === 'codex'
                           ? codexDefaultModelOptions
                           : modelOptions
@@ -2873,7 +2921,9 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="default">Default thinking</SelectItem>
+                      <SelectItem value="default">
+                        {t('settings.general.defaults.common.defaultThinking')}
+                      </SelectItem>
                       {thinkingLevelOptions.map(option => (
                         <SelectItem key={option.value} value={option.value}>
                           {option.label}
@@ -2893,8 +2943,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                     <SelectContent>
                       <SelectItem value="default">
                         {effectiveYoloBackend === 'codex'
-                          ? 'Default reasoning'
-                          : 'Default effort'}
+                          ? t(
+                              'settings.general.defaults.common.defaultReasoning'
+                            )
+                          : t('settings.general.defaults.common.defaultEffort')}
                       </SelectItem>
                       {(effectiveYoloBackend === 'codex'
                         ? codexReasoningOptions
@@ -2916,8 +2968,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
             />
 
             <InlineField
-              label="Allow web tools in plan mode"
-              description="WebFetch/WebSearch for Claude, --search for Codex"
+              label={t('settings.general.defaults.allowWebTools.label')}
+              description={t(
+                'settings.general.defaults.allowWebTools.description'
+              )}
             >
               <Switch
                 checked={preferences?.allow_web_tools_in_plan_mode ?? true}
@@ -2933,8 +2987,8 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
 
             {isNativeApp() && (
               <InlineField
-                label="Editor"
-                description="App to open worktrees in"
+                label={t('settings.general.defaults.editor.label')}
+                description={t('settings.general.defaults.editor.description')}
               >
                 <Select
                   value={preferences?.editor ?? 'zed'}
@@ -2956,8 +3010,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
 
             {isNativeApp() && (
               <InlineField
-                label="Terminal"
-                description="App to open terminals in"
+                label={t('settings.general.defaults.terminal.label')}
+                description={t(
+                  'settings.general.defaults.terminal.description'
+                )}
               >
                 <Select
                   value={preferences?.terminal ?? 'terminal'}
@@ -2979,8 +3035,8 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
 
             {isNativeApp() && (
               <InlineField
-                label="Open In"
-                description="Default app for Open button"
+                label={t('settings.general.defaults.openIn.label')}
+                description={t('settings.general.defaults.openIn.description')}
               >
                 <Select
                   value={preferences?.open_in ?? 'editor'}
@@ -3001,8 +3057,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
             )}
 
             <InlineField
-              label="New Session"
-              description="Default action for CMD+T"
+              label={t('settings.general.defaults.newSession.label')}
+              description={t(
+                'settings.general.defaults.newSession.description'
+              )}
             >
               <Select
                 value={preferences?.default_new_session_kind ?? 'chat'}
@@ -3022,8 +3080,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
             </InlineField>
 
             <InlineField
-              label="Git poll interval"
-              description="Check for branch updates when focused"
+              label={t('settings.general.defaults.gitPollInterval.label')}
+              description={t(
+                'settings.general.defaults.gitPollInterval.description'
+              )}
             >
               <Select
                 value={String(preferences?.git_poll_interval ?? 60)}
@@ -3043,8 +3103,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
             </InlineField>
 
             <InlineField
-              label="Remote poll interval"
-              description="Check for PR status updates"
+              label={t('settings.general.defaults.remotePollInterval.label')}
+              description={t(
+                'settings.general.defaults.remotePollInterval.description'
+              )}
             >
               <Select
                 value={String(preferences?.remote_poll_interval ?? 60)}
@@ -3064,8 +3126,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
             </InlineField>
 
             <InlineField
-              label="Auto-update AI backends"
-              description="Install Claude, Codex, OpenCode, and GitHub CLI updates in the background as soon as a new version is detected."
+              label={t('settings.general.defaults.autoUpdateAiBackends.label')}
+              description={t(
+                'settings.general.defaults.autoUpdateAiBackends.description'
+              )}
             >
               <Switch
                 checked={preferences?.auto_update_ai_backends ?? true}
@@ -3085,20 +3149,24 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
       {isGeneralScope && (
         <>
           <SettingsSection
-            title="Language"
+            title={t('settings.general.sections.language')}
             anchorId="pref-general-section-language"
           >
             <LanguageSwitcher />
           </SettingsSection>
 
           <SettingsSection
-            title="Notifications"
+            title={t('settings.general.sections.notifications')}
             anchorId="pref-general-section-notifications"
           >
             <div className="space-y-4">
               <InlineField
-                label="Web access sounds"
-                description="Applies only when using Jean in browser or mobile web access. Turn off to keep phone music uninterrupted."
+                label={t(
+                  'settings.general.notifications.webAccessSounds.label'
+                )}
+                description={t(
+                  'settings.general.notifications.webAccessSounds.description'
+                )}
               >
                 <div className="flex items-center gap-2">
                   <Checkbox
@@ -3110,14 +3178,18 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                     htmlFor="web-access-sounds-enabled"
                     className="cursor-pointer text-sm"
                   >
-                    Play Jean sounds in web access
+                    {t(
+                      'settings.general.notifications.webAccessSounds.checkbox'
+                    )}
                   </Label>
                 </div>
               </InlineField>
 
               <InlineField
-                label="Waiting sound"
-                description="Play when session needs your input"
+                label={t('settings.general.notifications.waitingSound.label')}
+                description={t(
+                  'settings.general.notifications.waitingSound.description'
+                )}
               >
                 <div className="flex items-center gap-2">
                   <Select
@@ -3156,8 +3228,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
               </InlineField>
 
               <InlineField
-                label="Review sound"
-                description="Play when session finishes"
+                label={t('settings.general.notifications.reviewSound.label')}
+                description={t(
+                  'settings.general.notifications.reviewSound.description'
+                )}
               >
                 <div className="flex items-center gap-2">
                   <Select
@@ -3200,13 +3274,15 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
           </SettingsSection>
 
           <SettingsSection
-            title="Auto-generate"
+            title={t('settings.general.sections.autoGenerate')}
             anchorId="pref-general-section-auto-generate"
           >
             <div className="space-y-4">
               <InlineField
-                label="Branch names"
-                description="Generate branch names from your first message"
+                label={t('settings.general.autoGenerate.branchNames.label')}
+                description={t(
+                  'settings.general.autoGenerate.branchNames.description'
+                )}
               >
                 <Switch
                   checked={preferences?.auto_branch_naming ?? true}
@@ -3214,8 +3290,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                 />
               </InlineField>
               <InlineField
-                label="Session names"
-                description="Generate session names from your first message"
+                label={t('settings.general.autoGenerate.sessionNames.label')}
+                description={t(
+                  'settings.general.autoGenerate.sessionNames.description'
+                )}
               >
                 <Switch
                   checked={preferences?.auto_session_naming ?? true}
@@ -3226,13 +3304,15 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
           </SettingsSection>
 
           <SettingsSection
-            title="Worktrees"
+            title={t('settings.general.sections.worktrees')}
             anchorId="pref-general-section-worktrees"
           >
             <div className="space-y-4">
               <InlineField
-                label="Auto-pull base branch"
-                description="Pull the latest changes before creating a new worktree"
+                label={t('settings.general.worktrees.autoPullBaseBranch.label')}
+                description={t(
+                  'settings.general.worktrees.autoPullBaseBranch.description'
+                )}
               >
                 <Switch
                   checked={preferences?.auto_pull_base_branch ?? true}
@@ -3247,8 +3327,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
               </InlineField>
 
               <InlineField
-                label="Auto-save context"
-                description="Automatically save session context after each AI response"
+                label={t('settings.general.worktrees.autoSaveContext.label')}
+                description={t(
+                  'settings.general.worktrees.autoSaveContext.description'
+                )}
               >
                 <Switch
                   checked={preferences?.auto_save_context ?? false}
@@ -3263,8 +3345,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
               </InlineField>
 
               <InlineField
-                label="Restore last session on project switch"
-                description="Automatically reopen the last worktree and session when switching projects"
+                label={t('settings.general.worktrees.restoreLastSession.label')}
+                description={t(
+                  'settings.general.worktrees.restoreLastSession.description'
+                )}
               >
                 <Switch
                   checked={preferences?.restore_last_session ?? true}
@@ -3279,8 +3363,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
               </InlineField>
 
               <InlineField
-                label="Expand tool calls by default"
-                description="Automatically expand tool call details in chat instead of showing a collapsed summary"
+                label={t('settings.general.worktrees.expandToolCalls.label')}
+                description={t(
+                  'settings.general.worktrees.expandToolCalls.description'
+                )}
               >
                 <Switch
                   checked={preferences?.expand_tool_calls_by_default ?? false}
@@ -3297,13 +3383,15 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
           </SettingsSection>
 
           <SettingsSection
-            title="Archive"
+            title={t('settings.general.sections.archive')}
             anchorId="pref-general-section-archive"
           >
             <div className="space-y-4">
               <InlineField
-                label="Confirm before closing"
-                description="Show confirmation dialog when closing sessions or worktrees"
+                label={t('settings.general.archive.confirmClose.label')}
+                description={t(
+                  'settings.general.archive.confirmClose.description'
+                )}
               >
                 <Switch
                   checked={preferences?.confirm_session_close ?? true}
@@ -3318,8 +3406,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
               </InlineField>
 
               <InlineField
-                label="Close original session on clear context"
-                description="Automatically close the original session when using Clear Context and yolo"
+                label={t('settings.general.archive.closeOnClear.label')}
+                description={t(
+                  'settings.general.archive.closeOnClear.description'
+                )}
               >
                 <Switch
                   checked={preferences?.close_original_on_clear_context ?? true}
@@ -3334,8 +3424,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
               </InlineField>
 
               <InlineField
-                label="Removal behavior"
-                description="What happens when closing sessions or worktrees"
+                label={t('settings.general.archive.removalBehavior.label')}
+                description={t(
+                  'settings.general.archive.removalBehavior.description'
+                )}
               >
                 <Select
                   value={preferences?.removal_behavior ?? 'delete'}
@@ -3361,8 +3453,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
               </InlineField>
 
               <InlineField
-                label="Auto-archive on PR merge"
-                description="Archive worktrees when their PR is merged"
+                label={t('settings.general.archive.autoArchiveOnPrMerge.label')}
+                description={t(
+                  'settings.general.archive.autoArchiveOnPrMerge.description'
+                )}
               >
                 <Switch
                   checked={preferences?.auto_archive_on_pr_merged ?? true}
@@ -3377,8 +3471,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
               </InlineField>
 
               <InlineField
-                label="Auto-delete archives"
-                description="Delete archived items older than this"
+                label={t('settings.general.archive.autoDeleteArchives.label')}
+                description={t(
+                  'settings.general.archive.autoDeleteArchives.description'
+                )}
               >
                 <Select
                   value={String(preferences?.archive_retention_days ?? 30)}
@@ -3401,8 +3497,10 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
               </InlineField>
 
               <InlineField
-                label="Delete all archives"
-                description="Permanently delete all archived worktrees and sessions"
+                label={t('settings.general.archive.deleteAllArchives.label')}
+                description={t(
+                  'settings.general.archive.deleteAllArchives.description'
+                )}
               >
                 <Button
                   variant="destructive"
@@ -3410,7 +3508,7 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                   onClick={() => setShowDeleteAllDialog(true)}
                   disabled={isDeleting}
                 >
-                  Delete All
+                  {t('settings.general.archive.deleteAllArchives.button')}
                 </Button>
               </InlineField>
             </div>
@@ -3418,13 +3516,15 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
 
           {isNativeApp() && (
             <SettingsSection
-              title="Troubleshooting"
+              title={t('settings.general.sections.troubleshooting')}
               anchorId="pref-general-section-troubleshooting"
             >
               <div className="space-y-4">
                 <InlineField
-                  label="Application logs"
-                  description="Open the log directory for troubleshooting"
+                  label={t('settings.general.troubleshooting.appLogs.label')}
+                  description={t(
+                    'settings.general.troubleshooting.appLogs.description'
+                  )}
                 >
                   <Button
                     variant="outline"
@@ -3437,7 +3537,7 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
                       }
                     }}
                   >
-                    Show Logs
+                    {t('settings.general.troubleshooting.appLogs.button')}
                   </Button>
                 </InlineField>
               </div>
@@ -3452,21 +3552,25 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete all archives?</AlertDialogTitle>
+            <AlertDialogTitle>
+              {t('settings.general.deleteAllDialog.title')}
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete all archived worktrees and sessions,
-              including their git branches and worktree directories. This action
-              cannot be undone.
+              {t('settings.general.deleteAllDialog.description')}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+            <AlertDialogCancel disabled={isDeleting}>
+              {t('common.actions.cancel')}
+            </AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDeleteAllArchives}
               disabled={isDeleting}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              {isDeleting ? 'Deleting...' : 'Delete All'}
+              {isDeleting
+                ? t('settings.general.deleteAllDialog.deleting')
+                : t('settings.general.archive.deleteAllArchives.button')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

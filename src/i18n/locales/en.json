@@ -15,7 +15,10 @@
       "retry": "Retry"
     },
     "placeholders": {
-      "search": "Search..."
+      "search": "Search...",
+      "select": "Select",
+      "selectFont": "Select font",
+      "selectMode": "Select mode"
     }
   },
   "errors": {
@@ -45,6 +48,247 @@
       "integrations": "Integrations",
       "usage": "Usage",
       "experimental": "Experimental"
+    },
+    "general": {
+      "sections": {
+        "language": "Language",
+        "defaults": "Defaults",
+        "notifications": "Notifications",
+        "autoGenerate": "Auto-generate",
+        "worktrees": "Worktrees",
+        "archive": "Archive",
+        "troubleshooting": "Troubleshooting"
+      },
+      "defaults": {
+        "defaultBackend": {
+          "label": "Default backend",
+          "description": "CLI to use for new sessions"
+        },
+        "defaultMode": {
+          "label": "Default mode",
+          "description": "Permission mode for new sessions"
+        },
+        "modeOptions": {
+          "plan": "Plan",
+          "build": "Build",
+          "yolo": "Yolo"
+        },
+        "compactChatView": {
+          "label": "Compact chat view",
+          "description": "Compact answers into one section for a cleaner chat, showing only the last prompt and answer by default."
+        },
+        "parallelExecution": {
+          "label": "Parallel execution prompting",
+          "description": "Add system prompt encouraging sub-agent parallelization for faster task execution"
+        },
+        "buildExecution": {
+          "label": "Build execution",
+          "description": "Backend, model, thinking, and effort override when approving plans"
+        },
+        "yoloExecution": {
+          "label": "Yolo execution",
+          "description": "Backend, model, thinking, and effort override when yolo-approving plans"
+        },
+        "aiLanguage": {
+          "label": "AI Language",
+          "description": "Language for AI responses (e.g. French, 日本語)"
+        },
+        "allowWebTools": {
+          "label": "Allow web tools in plan mode",
+          "description": "WebFetch/WebSearch for Claude, --search for Codex"
+        },
+        "editor": {
+          "label": "Editor",
+          "description": "App to open worktrees in"
+        },
+        "terminal": {
+          "label": "Terminal",
+          "description": "App to open terminals in"
+        },
+        "openIn": {
+          "label": "Open In",
+          "description": "Default app for Open button"
+        },
+        "newSession": {
+          "label": "New Session",
+          "description": "Default action for CMD+T"
+        },
+        "gitPollInterval": {
+          "label": "Git poll interval",
+          "description": "Check for branch updates when focused"
+        },
+        "remotePollInterval": {
+          "label": "Remote poll interval",
+          "description": "Check for PR status updates"
+        },
+        "autoUpdateAiBackends": {
+          "label": "Auto-update AI backends",
+          "description": "Install Claude, Codex, OpenCode, and GitHub CLI updates in the background as soon as a new version is detected."
+        },
+        "common": {
+          "default": "Default",
+          "defaultModel": "Default model",
+          "defaultThinking": "Default thinking",
+          "defaultEffort": "Default effort",
+          "defaultReasoning": "Default reasoning"
+        }
+      },
+      "notifications": {
+        "webAccessSounds": {
+          "label": "Web access sounds",
+          "description": "Applies only when using Jean in browser or mobile web access. Turn off to keep phone music uninterrupted.",
+          "checkbox": "Play Jean sounds in web access"
+        },
+        "waitingSound": {
+          "label": "Waiting sound",
+          "description": "Play when session needs your input"
+        },
+        "reviewSound": {
+          "label": "Review sound",
+          "description": "Play when session finishes"
+        }
+      },
+      "autoGenerate": {
+        "branchNames": {
+          "label": "Branch names",
+          "description": "Generate branch names from your first message"
+        },
+        "sessionNames": {
+          "label": "Session names",
+          "description": "Generate session names from your first message"
+        }
+      },
+      "worktrees": {
+        "autoPullBaseBranch": {
+          "label": "Auto-pull base branch",
+          "description": "Pull the latest changes before creating a new worktree"
+        },
+        "autoSaveContext": {
+          "label": "Auto-save context",
+          "description": "Automatically save session context after each AI response"
+        },
+        "restoreLastSession": {
+          "label": "Restore last session on project switch",
+          "description": "Automatically reopen the last worktree and session when switching projects"
+        },
+        "expandToolCalls": {
+          "label": "Expand tool calls by default",
+          "description": "Automatically expand tool call details in chat instead of showing a collapsed summary"
+        }
+      },
+      "archive": {
+        "confirmClose": {
+          "label": "Confirm before closing",
+          "description": "Show confirmation dialog when closing sessions or worktrees"
+        },
+        "closeOnClear": {
+          "label": "Close original session on clear context",
+          "description": "Automatically close the original session when using Clear Context and yolo"
+        },
+        "removalBehavior": {
+          "label": "Removal behavior",
+          "description": "What happens when closing sessions or worktrees"
+        },
+        "autoArchiveOnPrMerge": {
+          "label": "Auto-archive on PR merge",
+          "description": "Archive worktrees when their PR is merged"
+        },
+        "autoDeleteArchives": {
+          "label": "Auto-delete archives",
+          "description": "Delete archived items older than this"
+        },
+        "deleteAllArchives": {
+          "label": "Delete all archives",
+          "description": "Permanently delete all archived worktrees and sessions",
+          "button": "Delete All"
+        }
+      },
+      "troubleshooting": {
+        "appLogs": {
+          "label": "Application logs",
+          "description": "Open the log directory for troubleshooting",
+          "button": "Show Logs"
+        }
+      },
+      "deleteAllDialog": {
+        "title": "Delete all archives?",
+        "description": "This will permanently delete all archived worktrees and sessions, including their git branches and worktree directories. This action cannot be undone.",
+        "deleting": "Deleting..."
+      }
+    },
+    "appearance": {
+      "sections": {
+        "theme": "Theme",
+        "fonts": "Fonts",
+        "scaling": "Scaling",
+        "fileViewer": "File Viewer"
+      },
+      "theme": {
+        "colorTheme": {
+          "label": "Color theme",
+          "description": "Choose your preferred color scheme",
+          "options": {
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System"
+          },
+          "placeholder": "Select theme"
+        },
+        "syntaxThemeDark": {
+          "label": "Syntax theme (dark)",
+          "description": "Highlighting theme for code in dark mode"
+        },
+        "syntaxThemeLight": {
+          "label": "Syntax theme (light)",
+          "description": "Highlighting theme for code in light mode"
+        },
+        "windowTransparency": {
+          "label": "Window transparency",
+          "description": "Translucent window with desktop blur (uses significant GPU)"
+        },
+        "terminalBackground": {
+          "label": "Terminal background",
+          "description": "Pick a background color for the terminal panel"
+        },
+        "customTerminalColor": {
+          "label": "Custom terminal color",
+          "description": "Choose any color you like for the terminal background",
+          "ariaLabel": "Pick terminal background color"
+        }
+      },
+      "fonts": {
+        "uiFont": {
+          "label": "UI font",
+          "description": "Font for interface text",
+          "placeholder": "Select font"
+        },
+        "chatFont": {
+          "label": "Chat font",
+          "description": "Font for chat messages"
+        }
+      },
+      "scaling": {
+        "uiFont": {
+          "label": "UI font scaling",
+          "description": "Increase or decrease the size of the interface font"
+        },
+        "chatFont": {
+          "label": "Chat font scaling",
+          "description": "Increase or decrease the size of the chat font"
+        },
+        "zoom": {
+          "label": "Zoom level",
+          "description": "Control the zoom level to adjust the size of the interface",
+          "hint": "You can change the zoom level with {{modKey}} +/- and reset to the default zoom with {{modKey}}+0."
+        }
+      },
+      "fileViewer": {
+        "editFilesIn": {
+          "label": "Edit files in",
+          "description": "How to edit files when viewing them in Jean",
+          "placeholder": "Select mode"
+        }
+      }
     }
   }
 }

@@ -15,7 +15,10 @@
       "retry": "重试"
     },
     "placeholders": {
-      "search": "搜索…"
+      "search": "搜索…",
+      "select": "选择",
+      "selectFont": "选择字体",
+      "selectMode": "选择模式"
     }
   },
   "errors": {
@@ -45,6 +48,247 @@
       "integrations": "集成",
       "usage": "用量",
       "experimental": "实验性"
+    },
+    "general": {
+      "sections": {
+        "language": "语言",
+        "defaults": "默认值",
+        "notifications": "通知",
+        "autoGenerate": "自动生成",
+        "worktrees": "工作树",
+        "archive": "归档",
+        "troubleshooting": "故障排查"
+      },
+      "defaults": {
+        "defaultBackend": {
+          "label": "默认后端",
+          "description": "用于新会话的 CLI"
+        },
+        "defaultMode": {
+          "label": "默认模式",
+          "description": "新会话的权限模式"
+        },
+        "modeOptions": {
+          "plan": "Plan",
+          "build": "Build",
+          "yolo": "Yolo"
+        },
+        "compactChatView": {
+          "label": "紧凑聊天视图",
+          "description": "将回答合并为一个区块,默认只显示最后一条提示与回答,界面更简洁。"
+        },
+        "parallelExecution": {
+          "label": "并行执行提示",
+          "description": "添加系统提示鼓励子代理并行化,加速任务执行"
+        },
+        "buildExecution": {
+          "label": "Build 执行",
+          "description": "审批计划时的后端、模型、思考与力度覆盖"
+        },
+        "yoloExecution": {
+          "label": "Yolo 执行",
+          "description": "Yolo 审批计划时的后端、模型、思考与力度覆盖"
+        },
+        "aiLanguage": {
+          "label": "AI 语言",
+          "description": "AI 回复使用的语言(例如法语、日语)"
+        },
+        "allowWebTools": {
+          "label": "在 plan 模式允许 Web 工具",
+          "description": "Claude 的 WebFetch/WebSearch,Codex 的 --search"
+        },
+        "editor": {
+          "label": "编辑器",
+          "description": "用于打开工作树的程序"
+        },
+        "terminal": {
+          "label": "终端",
+          "description": "用于打开终端的程序"
+        },
+        "openIn": {
+          "label": "打开方式",
+          "description": "Open 按钮的默认程序"
+        },
+        "newSession": {
+          "label": "新会话",
+          "description": "CMD+T 的默认动作"
+        },
+        "gitPollInterval": {
+          "label": "Git 轮询间隔",
+          "description": "窗口聚焦时检查分支更新"
+        },
+        "remotePollInterval": {
+          "label": "远端轮询间隔",
+          "description": "检查 PR 状态更新"
+        },
+        "autoUpdateAiBackends": {
+          "label": "自动更新 AI 后端",
+          "description": "检测到新版本时在后台安装 Claude、Codex、OpenCode 与 GitHub CLI 更新。"
+        },
+        "common": {
+          "default": "默认",
+          "defaultModel": "默认模型",
+          "defaultThinking": "默认思考",
+          "defaultEffort": "默认力度",
+          "defaultReasoning": "默认推理"
+        }
+      },
+      "notifications": {
+        "webAccessSounds": {
+          "label": "网页访问声音",
+          "description": "仅在使用浏览器的网页访问或手机网页访问时生效。关闭以免打断手机音乐。",
+          "checkbox": "在网页访问中播放 Jean 声音"
+        },
+        "waitingSound": {
+          "label": "等待声音",
+          "description": "会话需要你输入时播放"
+        },
+        "reviewSound": {
+          "label": "Review 声音",
+          "description": "会话完成时播放"
+        }
+      },
+      "autoGenerate": {
+        "branchNames": {
+          "label": "分支名",
+          "description": "根据首条消息自动生成分支名"
+        },
+        "sessionNames": {
+          "label": "会话名",
+          "description": "根据首条消息自动生成会话名"
+        }
+      },
+      "worktrees": {
+        "autoPullBaseBranch": {
+          "label": "拉取最新 base 分支",
+          "description": "创建新工作树前先拉取最新变更"
+        },
+        "autoSaveContext": {
+          "label": "自动保存上下文",
+          "description": "每次 AI 响应后自动保存会话上下文"
+        },
+        "restoreLastSession": {
+          "label": "切换项目时恢复上次的会话",
+          "description": "切换项目时自动重新打开上次的 worktree 和会话"
+        },
+        "expandToolCalls": {
+          "label": "默认展开工具调用",
+          "description": "在聊天中默认展开工具调用详情,而不是显示折叠摘要"
+        }
+      },
+      "archive": {
+        "confirmClose": {
+          "label": "关闭前确认",
+          "description": "关闭会话或 worktree 时显示确认对话框"
+        },
+        "closeOnClear": {
+          "label": "清除上下文时关闭原会话",
+          "description": "在 Yolo 模式下使用 Clear Context 时自动关闭原会话"
+        },
+        "removalBehavior": {
+          "label": "删除行为",
+          "description": "关闭会话或 worktree 时会发生什么"
+        },
+        "autoArchiveOnPrMerge": {
+          "label": "PR 合并时自动归档",
+          "description": "PR 合并时自动归档 worktree"
+        },
+        "autoDeleteArchives": {
+          "label": "自动删除归档",
+          "description": "删除超过此时间的归档项"
+        },
+        "deleteAllArchives": {
+          "label": "删除所有归档",
+          "description": "永久删除所有已归档的 worktree 和会话",
+          "button": "全部删除"
+        }
+      },
+      "troubleshooting": {
+        "appLogs": {
+          "label": "应用日志",
+          "description": "打开日志目录以排查问题",
+          "button": "显示日志"
+        }
+      },
+      "deleteAllDialog": {
+        "title": "删除所有归档?",
+        "description": "这将永久删除所有已归档的 worktree 和会话,包括其 git 分支和工作树目录。此操作无法撤销。",
+        "deleting": "正在删除…"
+      }
+    },
+    "appearance": {
+      "sections": {
+        "theme": "主题",
+        "fonts": "字体",
+        "scaling": "缩放",
+        "fileViewer": "文件查看器"
+      },
+      "theme": {
+        "colorTheme": {
+          "label": "颜色主题",
+          "description": "选择你偏好的配色方案",
+          "options": {
+            "light": "浅色",
+            "dark": "深色",
+            "system": "跟随系统"
+          },
+          "placeholder": "选择主题"
+        },
+        "syntaxThemeDark": {
+          "label": "语法主题(深色)",
+          "description": "深色模式下的代码高亮主题"
+        },
+        "syntaxThemeLight": {
+          "label": "语法主题(浅色)",
+          "description": "浅色模式下的代码高亮主题"
+        },
+        "windowTransparency": {
+          "label": "窗口透明",
+          "description": "带桌面模糊的半透明窗口(占用较多 GPU)"
+        },
+        "terminalBackground": {
+          "label": "终端背景",
+          "description": "为终端面板挑选背景色"
+        },
+        "customTerminalColor": {
+          "label": "自定义终端颜色",
+          "description": "为终端背景选择任意颜色",
+          "ariaLabel": "挑选终端背景颜色"
+        }
+      },
+      "fonts": {
+        "uiFont": {
+          "label": "界面字体",
+          "description": "界面文字的字体",
+          "placeholder": "选择字体"
+        },
+        "chatFont": {
+          "label": "聊天字体",
+          "description": "聊天消息的字体"
+        }
+      },
+      "scaling": {
+        "uiFont": {
+          "label": "界面字体缩放",
+          "description": "增大或缩小界面字体"
+        },
+        "chatFont": {
+          "label": "聊天字体缩放",
+          "description": "增大或缩小聊天字体"
+        },
+        "zoom": {
+          "label": "缩放级别",
+          "description": "控制缩放级别以调整界面大小",
+          "hint": "可使用 {{modKey}} +/- 调整缩放,{{modKey}}+0 恢复默认。"
+        }
+      },
+      "fileViewer": {
+        "editFilesIn": {
+          "label": "文件编辑位置",
+          "description": "在 Jean 中查看文件时如何编辑",
+          "placeholder": "选择模式"
+        }
+      }
     }
   }
 }

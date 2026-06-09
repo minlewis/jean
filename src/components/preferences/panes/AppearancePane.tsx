@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { Switch } from '@/components/ui/switch'
@@ -75,6 +76,7 @@ function getErrorMessage(error: unknown): string {
 const modKey = isMacOS ? 'Cmd' : 'Ctrl'
 
 export const AppearancePane: React.FC = () => {
+  const { t } = useTranslation()
   const { theme, setTheme } = useTheme()
   const { data: preferences } = usePreferences()
   const patchPreferences = usePatchPreferences()
@@ -248,11 +250,14 @@ export const AppearancePane: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <SettingsSection title="Theme" anchorId="pref-appearance-section-theme">
+      <SettingsSection
+        title={t('settings.appearance.sections.theme')}
+        anchorId="pref-appearance-section-theme"
+      >
         <div className="space-y-4">
           <InlineField
-            label="Color theme"
-            description="Choose your preferred color scheme"
+            label={t('settings.appearance.theme.colorTheme.label')}
+            description={t('settings.appearance.theme.colorTheme.description')}
           >
             <Select
               value={theme}
@@ -260,19 +265,31 @@ export const AppearancePane: React.FC = () => {
               disabled={patchPreferences.isPending}
             >
               <SelectTrigger className="w-full sm:min-w-96">
-                <SelectValue placeholder="Select theme" />
+                <SelectValue
+                  placeholder={t(
+                    'settings.appearance.theme.colorTheme.placeholder'
+                  )}
+                />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="system">System</SelectItem>
+                <SelectItem value="light">
+                  {t('settings.appearance.theme.colorTheme.options.light')}
+                </SelectItem>
+                <SelectItem value="dark">
+                  {t('settings.appearance.theme.colorTheme.options.dark')}
+                </SelectItem>
+                <SelectItem value="system">
+                  {t('settings.appearance.theme.colorTheme.options.system')}
+                </SelectItem>
               </SelectContent>
             </Select>
           </InlineField>
 
           <InlineField
-            label="Syntax theme (dark)"
-            description="Highlighting theme for code in dark mode"
+            label={t('settings.appearance.theme.syntaxThemeDark.label')}
+            description={t(
+              'settings.appearance.theme.syntaxThemeDark.description'
+            )}
           >
             <Select
               value={preferences?.syntax_theme_dark ?? 'vitesse-black'}
@@ -285,7 +302,11 @@ export const AppearancePane: React.FC = () => {
               disabled={patchPreferences.isPending}
             >
               <SelectTrigger className="w-96">
-                <SelectValue placeholder="Select theme" />
+                <SelectValue
+                  placeholder={t(
+                    'settings.appearance.theme.colorTheme.placeholder'
+                  )}
+                />
               </SelectTrigger>
               <SelectContent>
                 {syntaxThemeDarkOptions.map(option => (
@@ -298,8 +319,10 @@ export const AppearancePane: React.FC = () => {
           </InlineField>
 
           <InlineField
-            label="Syntax theme (light)"
-            description="Highlighting theme for code in light mode"
+            label={t('settings.appearance.theme.syntaxThemeLight.label')}
+            description={t(
+              'settings.appearance.theme.syntaxThemeLight.description'
+            )}
           >
             <Select
               value={preferences?.syntax_theme_light ?? 'github-light'}
@@ -326,8 +349,10 @@ export const AppearancePane: React.FC = () => {
 
           {isMacOS && (
             <InlineField
-              label="Window transparency"
-              description="Translucent window with desktop blur (uses significant GPU)"
+              label={t('settings.appearance.theme.windowTransparency.label')}
+              description={t(
+                'settings.appearance.theme.windowTransparency.description'
+              )}
             >
               <Switch
                 checked={preferences?.window_vibrancy ?? false}
@@ -338,8 +363,10 @@ export const AppearancePane: React.FC = () => {
           )}
 
           <InlineField
-            label="Terminal background"
-            description="Pick a background color for the terminal panel"
+            label={t('settings.appearance.theme.terminalBackground.label')}
+            description={t(
+              'settings.appearance.theme.terminalBackground.description'
+            )}
           >
             <Select
               value={terminalMode}
@@ -351,7 +378,7 @@ export const AppearancePane: React.FC = () => {
               disabled={patchPreferences.isPending}
             >
               <SelectTrigger className="w-96">
-                <SelectValue placeholder="Select" />
+                <SelectValue placeholder={t('common.placeholders.select')} />
               </SelectTrigger>
               <SelectContent>
                 {terminalBackgroundOptions.map(option => (
@@ -365,8 +392,10 @@ export const AppearancePane: React.FC = () => {
 
           {terminalMode === 'custom' && (
             <InlineField
-              label="Custom terminal color"
-              description="Choose any color you like for the terminal background"
+              label={t('settings.appearance.theme.customTerminalColor.label')}
+              description={t(
+                'settings.appearance.theme.customTerminalColor.description'
+              )}
             >
               <div className="flex items-center gap-2">
                 <input
@@ -376,7 +405,9 @@ export const AppearancePane: React.FC = () => {
                   }
                   onChange={e => handleCustomColorPick(e.target.value)}
                   className="h-9 w-12 cursor-pointer rounded border"
-                  aria-label="Pick terminal background color"
+                  aria-label={t(
+                    'settings.appearance.theme.customTerminalColor.ariaLabel'
+                  )}
                 />
                 <Input
                   value={customColorValue}
@@ -392,9 +423,15 @@ export const AppearancePane: React.FC = () => {
         </div>
       </SettingsSection>
 
-      <SettingsSection title="Fonts" anchorId="pref-appearance-section-fonts">
+      <SettingsSection
+        title={t('settings.appearance.sections.fonts')}
+        anchorId="pref-appearance-section-fonts"
+      >
         <div className="space-y-4">
-          <InlineField label="UI font" description="Font for interface text">
+          <InlineField
+            label={t('settings.appearance.fonts.uiFont.label')}
+            description={t('settings.appearance.fonts.uiFont.description')}
+          >
             <Select
               value={preferences?.ui_font ?? 'inter'}
               onValueChange={value =>
@@ -403,7 +440,9 @@ export const AppearancePane: React.FC = () => {
               disabled={patchPreferences.isPending}
             >
               <SelectTrigger className="w-96">
-                <SelectValue placeholder="Select font" />
+                <SelectValue
+                  placeholder={t('common.placeholders.selectFont')}
+                />
               </SelectTrigger>
               <SelectContent>
                 {uiFontOptions.map(option => (
@@ -415,7 +454,10 @@ export const AppearancePane: React.FC = () => {
             </Select>
           </InlineField>
 
-          <InlineField label="Chat font" description="Font for chat messages">
+          <InlineField
+            label={t('settings.appearance.fonts.chatFont.label')}
+            description={t('settings.appearance.fonts.chatFont.description')}
+          >
             <Select
               value={preferences?.chat_font ?? 'jetbrains-mono'}
               onValueChange={value =>
@@ -424,7 +466,9 @@ export const AppearancePane: React.FC = () => {
               disabled={patchPreferences.isPending}
             >
               <SelectTrigger className="w-96">
-                <SelectValue placeholder="Select font" />
+                <SelectValue
+                  placeholder={t('common.placeholders.selectFont')}
+                />
               </SelectTrigger>
               <SelectContent>
                 {chatFontOptions.map(option => (
@@ -439,13 +483,13 @@ export const AppearancePane: React.FC = () => {
       </SettingsSection>
 
       <SettingsSection
-        title="Scaling"
+        title={t('settings.appearance.sections.scaling')}
         anchorId="pref-appearance-section-scaling"
       >
         <div className="space-y-5">
           <ScalingField
-            label="UI font scaling"
-            description="Increase or decrease the size of the interface font"
+            label={t('settings.appearance.scaling.uiFont.label')}
+            description={t('settings.appearance.scaling.uiFont.description')}
           >
             <Slider
               ticks={uiFontScaleTicks}
@@ -458,8 +502,8 @@ export const AppearancePane: React.FC = () => {
           </ScalingField>
 
           <ScalingField
-            label="Chat font scaling"
-            description="Increase or decrease the size of the chat font"
+            label={t('settings.appearance.scaling.chatFont.label')}
+            description={t('settings.appearance.scaling.chatFont.description')}
           >
             <Slider
               ticks={chatFontScaleTicks}
@@ -472,8 +516,8 @@ export const AppearancePane: React.FC = () => {
           </ScalingField>
 
           <ScalingField
-            label="Zoom level"
-            description="Control the zoom level to adjust the size of the interface"
+            label={t('settings.appearance.scaling.zoom.label')}
+            description={t('settings.appearance.scaling.zoom.description')}
           >
             <Slider
               ticks={zoomLevelTicks}
@@ -483,21 +527,22 @@ export const AppearancePane: React.FC = () => {
               disabled={patchPreferences.isPending}
             />
             <p className="text-xs text-muted-foreground">
-              You can change the zoom level with {modKey} +/- and reset to the
-              default zoom with {modKey}+0.
+              {t('settings.appearance.scaling.zoom.hint', { modKey })}
             </p>
           </ScalingField>
         </div>
       </SettingsSection>
 
       <SettingsSection
-        title="File Viewer"
+        title={t('settings.appearance.sections.fileViewer')}
         anchorId="pref-appearance-section-file-viewer"
       >
         <div className="space-y-4">
           <InlineField
-            label="Edit files in"
-            description="How to edit files when viewing them in Jean"
+            label={t('settings.appearance.fileViewer.editFilesIn.label')}
+            description={t(
+              'settings.appearance.fileViewer.editFilesIn.description'
+            )}
           >
             <Select
               value={preferences?.file_edit_mode ?? 'external'}
@@ -507,7 +552,9 @@ export const AppearancePane: React.FC = () => {
               disabled={patchPreferences.isPending}
             >
               <SelectTrigger className="w-96">
-                <SelectValue placeholder="Select mode" />
+                <SelectValue
+                  placeholder={t('common.placeholders.selectMode')}
+                />
               </SelectTrigger>
               <SelectContent>
                 {fileEditModeOptions.map(option => (
