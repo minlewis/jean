@@ -1,0 +1,50 @@
+{
+  "switcher": {
+    "label": "语言",
+    "description": "界面语言"
+  },
+  "switcherOptions": {
+    "en": "English",
+    "zh-CN": "简体中文"
+  },
+  "common": {
+    "actions": {
+      "save": "保存",
+      "cancel": "取消",
+      "confirm": "确认",
+      "retry": "重试"
+    },
+    "placeholders": {
+      "search": "搜索…"
+    }
+  },
+  "errors": {
+    "generic": "出现错误",
+    "retry": "请重试"
+  },
+  "settings": {
+    "title": "设置",
+    "description": "在此自定义你的应用偏好。",
+    "breadcrumb": "设置",
+    "sections": {
+      "general": "通用",
+      "appearance": "外观",
+      "keybindings": "快捷键",
+      "claude": "Claude",
+      "codex": "Codex",
+      "opencode": "OpenCode",
+      "cursor": "Cursor",
+      "github": "GitHub CLI",
+      "coderabbit": "CodeRabbit CLI",
+      "terminal": "终端",
+      "magic-prompts": "魔法提示",
+      "opinionated": "Opinionated",
+      "providers": "Providers",
+      "web-access": "网页访问",
+      "mcp-servers": "MCP 服务器",
+      "integrations": "集成",
+      "usage": "用量",
+      "experimental": "实验性"
+    }
+  }
+}

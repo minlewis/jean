@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useMemo, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Settings,
   Palette,
@@ -91,6 +92,27 @@ interface NavigationItem {
 interface NavigationSeparator {
   type: 'separator'
   id: string
+}
+
+const PANE_I18N_KEYS: Record<PreferencePane, string> = {
+  general: 'settings.sections.general',
+  appearance: 'settings.sections.appearance',
+  keybindings: 'settings.sections.keybindings',
+  claude: 'settings.sections.claude',
+  codex: 'settings.sections.codex',
+  opencode: 'settings.sections.opencode',
+  cursor: 'settings.sections.cursor',
+  github: 'settings.sections.github',
+  coderabbit: 'settings.sections.coderabbit',
+  terminal: 'settings.sections.terminal',
+  'magic-prompts': 'settings.sections.magic-prompts',
+  opinionated: 'settings.sections.opinionated',
+  providers: 'settings.sections.providers',
+  'web-access': 'settings.sections.web-access',
+  'mcp-servers': 'settings.sections.mcp-servers',
+  integrations: 'settings.sections.integrations',
+  usage: 'settings.sections.usage',
+  experimental: 'settings.sections.experimental',
 }
 
 const navigationEntries: (NavigationItem | NavigationSeparator)[] = [
@@ -236,49 +258,6 @@ const paneIconMap: Record<PreferencePane, LucideIcon> = {
   'web-access': Globe,
 }
 
-const getPaneTitle = (pane: PreferencePane): string => {
-  switch (pane) {
-    case 'general':
-      return 'General'
-    case 'claude':
-      return 'Claude'
-    case 'codex':
-      return 'Codex'
-    case 'opencode':
-      return 'OpenCode'
-    case 'cursor':
-      return 'Cursor'
-    case 'github':
-      return 'GitHub CLI'
-    case 'coderabbit':
-      return 'CodeRabbit CLI'
-    case 'appearance':
-      return 'Appearance'
-    case 'keybindings':
-      return 'Keybindings'
-    case 'terminal':
-      return 'Terminal'
-    case 'magic-prompts':
-      return 'Magic Prompts'
-    case 'mcp-servers':
-      return 'MCP Servers'
-    case 'providers':
-      return 'Providers'
-    case 'usage':
-      return 'Usage'
-    case 'integrations':
-      return 'Integrations'
-    case 'experimental':
-      return 'Experimental'
-    case 'opinionated':
-      return 'Opinionated'
-    case 'web-access':
-      return 'Web Access'
-    default:
-      return 'General'
-  }
-}
-
 /** Group search results by pane, preserving Fuse.js ranking order within each group. */
 function groupResultsByPane(results: PreferenceSearchEntry[]) {
   const groups: {
@@ -318,6 +297,7 @@ function isEditableTarget(target: EventTarget | null) {
 }
 
 export function PreferencesDialog() {
+  const { t } = useTranslation()
   const [activePane, setActivePane] = useState<PreferencePane>('general')
   const [searchValue, setSearchValue] = useState('')
   const [searchOpen, setSearchOpen] = useState(false)
@@ -645,9 +625,9 @@ export function PreferencesDialog() {
         onEscapeKeyDown={handleDialogEscape}
         className="overflow-hidden p-0 !w-screen !h-dvh !max-w-screen !max-h-none !rounded-none sm:!w-[calc(100vw-4rem)] sm:!max-w-[calc(100vw-4rem)] sm:!h-[85vh] sm:!rounded-xl font-sans"
       >
-        <DialogTitle className="sr-only">Settings</DialogTitle>
+        <DialogTitle className="sr-only">{t('settings.title')}</DialogTitle>
         <DialogDescription className="sr-only">
-          Customize your application preferences here.
+          {t('settings.description')}
         </DialogDescription>
 
         <SidebarProvider className="!min-h-0 !h-full items-stretch overflow-hidden">
@@ -672,7 +652,7 @@ export function PreferencesDialog() {
                               className="w-full"
                             >
                               <entry.icon />
-                              <span>{entry.name}</span>
+                              <span>{t(PANE_I18N_KEYS[entry.id])}</span>
                             </button>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
@@ -700,7 +680,7 @@ export function PreferencesDialog() {
                       .filter(item => !item.desktopOnly)
                       .map(item => (
                         <SelectItem key={item.id} value={item.id}>
-                          {item.name}
+                          {t(PANE_I18N_KEYS[item.id])}
                         </SelectItem>
                       ))}
                   </SelectContent>
@@ -713,12 +693,14 @@ export function PreferencesDialog() {
                 <Breadcrumb className="hidden md:block">
                   <BreadcrumbList>
                     <BreadcrumbItem>
-                      <BreadcrumbLink href="#">Settings</BreadcrumbLink>
+                      <BreadcrumbLink href="#">
+                        {t('settings.breadcrumb')}
+                      </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
                       <BreadcrumbPage>
-                        {getPaneTitle(activePane)}
+                        {t(PANE_I18N_KEYS[activePane])}
                       </BreadcrumbPage>
                     </BreadcrumbItem>
                   </BreadcrumbList>

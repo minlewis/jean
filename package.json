@@ -39,7 +39,8 @@
     "dev:e2e": "vite --config e2e/vite.config.e2e.ts --port 1421",
     "test:e2e": "playwright test --config e2e/playwright.config.ts",
     "test:all": "bun run test:run && bun run rust:test",
-    "check:all": "bun run typecheck && bun run lint && bun run format:check && bun run rust:fmt:check && bun run rust:clippy && bun run test:run && bun run rust:test",
+    "check:all": "bun run typecheck && bun run lint && bun run format:check && bun run rust:fmt:check && bun run rust:clippy && bun run test:run && bun run rust:test && bun run i18n:check",
+    "i18n:check": "bun scripts/check-i18n.ts",
     "fix:all": "bun run lint:fix && bun run format && bun run rust:fmt && bun run rust:clippy:fix",
     "build:analyze": "vite build && echo '\\n📊 Bundle analysis complete. Check dist/ folder sizes or use a tool like webpack-bundle-analyzer on the dist folder.'",
     "release:prepare": "node scripts/prepare-release.js",
@@ -118,6 +119,8 @@
     "sonner": "^2.0.6",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
+    "i18next": "^23.16.5",
+    "react-i18next": "^15.1.3",
     "zustand": "^5.0.6"
   },
   "devDependencies": {

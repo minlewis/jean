@@ -1,0 +1,50 @@
+{
+  "switcher": {
+    "label": "Language",
+    "description": "Interface language"
+  },
+  "switcherOptions": {
+    "en": "English",
+    "zh-CN": "Simplified Chinese"
+  },
+  "common": {
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "retry": "Retry"
+    },
+    "placeholders": {
+      "search": "Search..."
+    }
+  },
+  "errors": {
+    "generic": "Something went wrong",
+    "retry": "Please try again"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Customize your application preferences here.",
+    "breadcrumb": "Settings",
+    "sections": {
+      "general": "General",
+      "appearance": "Appearance",
+      "keybindings": "Keybindings",
+      "claude": "Claude",
+      "codex": "Codex",
+      "opencode": "OpenCode",
+      "cursor": "Cursor",
+      "github": "GitHub CLI",
+      "coderabbit": "CodeRabbit CLI",
+      "terminal": "Terminal",
+      "magic-prompts": "Magic Prompts",
+      "opinionated": "Opinionated",
+      "providers": "Providers",
+      "web-access": "Web Access",
+      "mcp-servers": "MCP Servers",
+      "integrations": "Integrations",
+      "usage": "Usage",
+      "experimental": "Experimental"
+    }
+  }
+}

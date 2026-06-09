@@ -15,6 +15,7 @@ import { Switch } from '@/components/ui/switch'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui/button'
 import { BackendLabel } from '@/components/ui/backend-label'
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
 import { Input } from '@/components/ui/input'
 import {
   Command,
@@ -3083,6 +3084,13 @@ export const GeneralPane: React.FC<{ scope?: PreferencesPaneScope }> = ({
 
       {isGeneralScope && (
         <>
+          <SettingsSection
+            title="Language"
+            anchorId="pref-general-section-language"
+          >
+            <LanguageSwitcher />
+          </SettingsSection>
+
           <SettingsSection
             title="Notifications"
             anchorId="pref-general-section-notifications"

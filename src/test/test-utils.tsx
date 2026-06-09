@@ -1,6 +1,9 @@
 import React from 'react'
 import { render, type RenderOptions } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { I18nextProvider } from 'react-i18next'
+
+import i18n from '@/i18n/config'
 
 const createTestQueryClient = () =>
   new QueryClient({
@@ -22,7 +25,11 @@ const AllTheProviders = ({ children }: AllTheProvidersProps) => {
   const queryClient = createTestQueryClient()
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <I18nextProvider i18n={i18n}>
+      <QueryClientProvider client={queryClient}>
+        {children}
+      </QueryClientProvider>
+    </I18nextProvider>
   )
 }
 
