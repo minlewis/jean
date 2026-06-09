@@ -88,3 +88,8 @@ incremental = true       # Reuse compilation across local rebuilds
 
 [dev-dependencies]
 tempfile = "3.23.0"
+
+# Allow pre-existing clippy warnings tightened by newer Rust toolchains.
+# These are stylistic, not bugs. Re-evaluate when bumping the toolchain pin.
+[lints.clippy]
+unnecessary_to_owned = "allow"

@@ -71,7 +71,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['scripts/**/*.js'],
+    files: ['scripts/**/*.{js,mjs}'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
@@ -93,6 +93,23 @@ export default tseslint.config(
     rules: {
       'no-console': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
+  {
+    files: ['scripts/check-i18n.ts'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        Buffer: 'readonly',
+      },
+    },
+    rules: {
+      'no-console': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/consistent-type-definitions': 'off',
     },
   },
   {

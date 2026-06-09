@@ -9,9 +9,11 @@ const mocks = vi.hoisted(() => ({
   openExternal: vi.fn(),
 }))
 
+type MockState = Record<string, unknown>
+
 vi.mock('@/store/ui-store', () => ({
-  useUIStore: (selector?: (state: any) => unknown) => {
-    const state = {
+  useUIStore: (selector?: (state: MockState) => unknown) => {
+    const state: MockState = {
       openInModalOpen: true,
       setOpenInModalOpen: mocks.setOpenInModalOpen,
       openPreferencesPane: mocks.openPreferencesPane,
@@ -23,8 +25,8 @@ vi.mock('@/store/ui-store', () => ({
 }))
 
 vi.mock('@/store/projects-store', () => ({
-  useProjectsStore: (selector?: (state: any) => unknown) => {
-    const state = {
+  useProjectsStore: (selector?: (state: MockState) => unknown) => {
+    const state: MockState = {
       selectedWorktreeId: 'wt-1',
       selectedProjectId: 'project-1',
     }
@@ -34,7 +36,7 @@ vi.mock('@/store/projects-store', () => ({
 
 vi.mock('@/store/chat-store', () => ({
   useChatStore: Object.assign(
-    (selector?: (state: any) => unknown) => {
+    (selector?: (state: MockState) => unknown) => {
       const state = {
         activeWorktreeId: null,
         activeSessionIds: { 'wt-1': 'session-1' },
@@ -140,9 +142,13 @@ describe('OpenInModal', () => {
   it('shows worktree and loaded security/advisory context URLs', async () => {
     render(<OpenInModal />)
 
-    expect(await screen.findByText('Advisory GHSA-892v-qq52-xprh')).toBeInTheDocument()
+    expect(
+      await screen.findByText('Advisory GHSA-892v-qq52-xprh')
+    ).toBeInTheDocument()
     expect(screen.getByText('Security #7')).toBeInTheDocument()
     expect(screen.getByText('Security #9')).toBeInTheDocument()
-    expect(screen.getByText('Advisory GHSA-loaded-1234-5678')).toBeInTheDocument()
+    expect(
+      screen.getByText('Advisory GHSA-loaded-1234-5678')
+    ).toBeInTheDocument()
   })
 })

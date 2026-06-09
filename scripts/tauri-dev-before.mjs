@@ -14,7 +14,11 @@ const rootDir = resolve(__dirname, '..')
 const isWindows = process.platform === 'win32'
 
 const child = isWindows
-  ? spawn('bun', ['run', 'dev'], { cwd: rootDir, stdio: 'inherit', shell: true })
+  ? spawn('bun', ['run', 'dev'], {
+      cwd: rootDir,
+      stdio: 'inherit',
+      shell: true,
+    })
   : spawn('bash', ['scripts/tauri-dev-with-web-access.sh'], {
       cwd: rootDir,
       stdio: 'inherit',

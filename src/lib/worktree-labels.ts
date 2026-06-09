@@ -76,7 +76,8 @@ export function getPinnedWorktreeLabelTabs(
       if (!tabs.has(key) || seenOnWorktree.has(key)) continue
 
       seenOnWorktree.add(key)
-      tabs.get(key)!.count += 1
+      const tab = tabs.get(key)
+      if (tab) tab.count += 1
     }
   }
 

@@ -63,8 +63,10 @@ function checkLocaleParity(): { ok: boolean; errors: string[] } {
   const onlyEn = [...enKeys].filter(k => !zhKeys.has(k))
   const onlyZh = [...zhKeys].filter(k => !enKeys.has(k))
 
-  for (const k of onlyEn) errors.push(`[parity] en has key missing in zh-CN: ${k}`)
-  for (const k of onlyZh) errors.push(`[parity] zh-CN has key missing in en: ${k}`)
+  for (const k of onlyEn)
+    errors.push(`[parity] en has key missing in zh-CN: ${k}`)
+  for (const k of onlyZh)
+    errors.push(`[parity] zh-CN has key missing in en: ${k}`)
 
   return { ok: errors.length === 0, errors }
 }
@@ -94,7 +96,10 @@ function* walkFiles(dir: string, exts: string[]): Generator<string> {
   }
 }
 
-function checkTCallReferences(knownKeys: Set<string>): { ok: boolean; errors: string[] } {
+function checkTCallReferences(knownKeys: Set<string>): {
+  ok: boolean
+  errors: string[]
+} {
   const errors: string[] = []
   // Match t('foo.bar.baz') or t("foo.bar") — single-quoted, double-quoted, with optional whitespace
   const pattern = /\bt\(\s*['"]([^'"]+)['"]/g
@@ -109,6 +114,7 @@ function checkTCallReferences(knownKeys: Set<string>): { ok: boolean; errors: st
     let m: RegExpExecArray | null
     while ((m = pattern.exec(content)) !== null) {
       const key = m[1]
+      if (key === undefined) continue
       if (!knownKeys.has(key)) {
         errors.push(`[t-ref] ${file}: unknown key '${key}'`)
       }
@@ -148,7 +154,9 @@ function main(): number {
   console.log('i18n:check')
   console.log('==========')
   if (result.errors.length === 0) {
-    console.log(`✅ pass — ${knownKeys.size} keys consistent across en.json and zh-CN.json`)
+    console.log(
+      `✅ pass — ${knownKeys.size} keys consistent across en.json and zh-CN.json`
+    )
   } else {
     console.log(`❌ fail — ${result.errors.length} error(s):`)
     for (const e of result.errors) console.log(`   - ${e}`)

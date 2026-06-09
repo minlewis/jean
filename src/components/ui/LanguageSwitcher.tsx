@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-export type LanguageSwitcherProps = {
+export interface LanguageSwitcherProps {
   /** Optional className for the outer wrapper */
   className?: string
   /** Optional className for the Select trigger */

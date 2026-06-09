@@ -8,7 +8,7 @@ import {
   type SupportedLanguage,
 } from '@/i18n/config'
 
-export type UseUILanguageResult = {
+export interface UseUILanguageResult {
   /** 当前语言,一定在 supported set 内 */
   language: SupportedLanguage
   /** 切换语言 + 持久化到 localStorage */

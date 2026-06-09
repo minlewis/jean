@@ -14,10 +14,15 @@ src-tauri/gen/
 *.config.ts
 vite.config.ts
 tailwind.config.js
+src-tauri/tauri.conf.json
 
 # Generated files
 package-lock.json
 .git/
+
+# Auto-generated runtime data (not human-edited)
+data/
+test-results/
 
 # Logs
 *.log

@@ -9,7 +9,9 @@ export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number]
 
 export const LANGUAGE_STORAGE_KEY = 'jean.ui.language'
 
-export function isSupportedLanguage(value: unknown): value is SupportedLanguage {
+export function isSupportedLanguage(
+  value: unknown
+): value is SupportedLanguage {
   return (
     typeof value === 'string' &&
     (SUPPORTED_LANGUAGES as readonly string[]).includes(value)
